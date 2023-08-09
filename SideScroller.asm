@@ -12,10 +12,10 @@
 .SECTION "MainCode"
 
 Start:
-	InitSNES		; Init SNES
+	InitSNES				; Init SNES
 	
 	; Load palette for tiles
-	LoadPalette BG_Palette, 0, 2
+	LoadPalette BG_Palette, 0, 2		; Palette: BG_Palette, Start Color: 0, BPP: 2
 
 	; Load tile data to VRAM
 	LoadBlockToVRAM Tiles, $0000, $0020
@@ -30,16 +30,7 @@ Start:
 	lda #$01
 	sta $2118
 	
-;	stz $2121		; Edit color 0 - snes' screen color you can write it in binary or hex
-;	lda #%00011111		; binary is more visual, but if you wanna be cool use hex
-;	sta $2122
-;	stz $2122		; Secon byte has no data, so we write a 0
-
-;	lda #$0F		; = 00001111
-;	sta $2100		; Turn on screen, full brightness
-	
-	; Setup video modes and other stuff, then turn on screen
-	jsr SetupVideo
+	jsr SetupVideo				; Setup video modes and other stuff, then turn on screen
 
 forever:
 	jmp forever
