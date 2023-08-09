@@ -1,0 +1,5 @@
+..\..\..\pcx2snes\pcx2snes.exe Rosy-42.pcx -b2
+pcx2snes.exe.lnk Rosy-42.pcx -b2
+
+Tiles:
+BG_Palette:
