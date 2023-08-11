@@ -1,4 +1,4 @@
 
-snes9x-x64.exe - Shortcut.lnk
+*.lnk
 *.ase
-sprites/pcx2snes.exe.lnk
+*.smc
