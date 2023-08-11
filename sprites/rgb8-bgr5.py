@@ -1,14 +1,24 @@
-###########################################
-# Made by CoffeeCatRailway                #
-# Converts .pal files with rgb888 colors  #
-# into .inc file with bgr555 colors       #
-###########################################
+#########################################################
+# Made by CoffeeCatRailway                              #
+# Converts .pal files with rgb888 colors                #
+# into .inc file with bgr555 colors for snes            #
+#                                                       #
+# Usage:                                                #
+# 1) File Explorer: Drag .pal file onto this script     #
+# 2) Console: C:\> python rgb8-bgr5.py example.pal      #
+#########################################################
 
 import math
 import sys
 import argparse
 
-def convert(hex888 = "00FF00"):
+# Constants
+paletteName = "BG_Palette"
+emptyColor = "0000"
+fileOut = "palette-out.inc"
+
+# Function to convert rgb888 color to bgr555
+def convert(hex888="00FF00"):
     hex888 = str(hex888)
     r = math.floor(int(hex888[0:2], 16) / 8) << 0;
     g = math.floor(int(hex888[2:4], 16) / 8) << 5;
@@ -17,7 +27,11 @@ def convert(hex888 = "00FF00"):
     hex555 = format((r+g+b), "04X")
     return hex555[2:4] + hex555[0:2]
 
-def handleFile(path, paletteSize, printOut, ignoreEmpty):
+# Function to convert .pal file
+def handleFile(path, paletteSize=4, printOut=False, ignoreEmpty=True):
+    if not args.path.endswith(".pal"): # Check if file ends with .pal
+        raise Exception("'path' must be of type '.pal'!")
+    
     hex555array = []
     # Convert colors
     print("Converting colors...")
@@ -37,7 +51,7 @@ def handleFile(path, paletteSize, printOut, ignoreEmpty):
         for i in range(0, len(hex555array), paletteSize):
             count = 0
             for j in range(0, paletteSize):
-                if hex555array[i+j] == "0000":
+                if hex555array[i+j] == emptyColor:
                     count += 1
             if count == 4:
                 toRemove.append(i)
@@ -47,9 +61,9 @@ def handleFile(path, paletteSize, printOut, ignoreEmpty):
         hex555array = [i for j, i in enumerate(hex555array) if j not in toRemove] # All indices in 'toRemove'
     
     # Write colors to file
-    print("Writing to 'out'inc'...")
-    with open("out.inc", "w") as file:
-        file.write("BG_Palette:\n")
+    print("Writing to '" + fileOut + "'...")
+    with open(fileOut, "w") as file:
+        file.write(paletteName + ":\n")
         for i in range(0, len(hex555array), paletteSize):
             palette = "\t.db "
             for j in range(0, paletteSize):
@@ -72,10 +86,7 @@ if __name__ == "__main__":
     parser.add_argument("-e", "--ignoreempty", action="store_false", help="Should ignore 'empty' palette's")
     args = parser.parse_args()
     
-    if not args.path.endswith(".pal"):
-        raise Exception("'path' must be of type '.pal'!")
-    else:
-        handleFile(args.path, args.palettesize, args.printout, args.ignoreempty)
+    handleFile(args.path, args.palettesize, args.printout, args.ignoreempty)
     
     #if len(sys.argv) >= 2:
     #    handleFile(sys.argv[1])

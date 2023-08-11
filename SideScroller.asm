@@ -11,7 +11,7 @@
 ; ==Main Code==
 
 .MACRO Stall
-	.REPT 7
+	.REPT 14
 		WAI
 	.ENDR
 .ENDM
