@@ -71,12 +71,12 @@ def handleFile(path, paletteSize=4, printOut=False, ignoreEmpty=True):
                 palette += "$" + hex555[0:2] + ", $" + hex555[2:4] +", "
             file.write(palette[0:-2] + "\n")
     
-    input("Press any key to continue...")
+    input("Press ENTER to continue...")
 
 #def handleSingle():
 #    hex_ = input("Enter RGB888 hex value: ")
 #    print("BGR555 hex: " + convert(hex_))
-#    input("Press any key to continue...")
+#    input("Press ENTER to continue...")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

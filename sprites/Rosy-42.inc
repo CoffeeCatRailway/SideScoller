@@ -1,8 +1,10 @@
 Tiles:
-    .db $E7, $EF, $E3, $EF, $EF, $EF, $FF, $A5, $FF, $81, $83, $BD, $DB, $A5, $99, $A5
-    .db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-    .db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $CF, $FF, $B7, $FF, $FF, $FF, $FF, $FF
-    .db $FF, $FF, $FF, $FF, $FF, $FF, $E7, $FF, $DB, $FF, $BD, $FF, $FF, $FF, $FF, $FF
+    .db $E7, $EF, $E3, $EF, $EF, $EF, $FF, $A5, $FF, $81, $83, $BD, $DB, $A5, $99, $A5 ; 00, Sand castle
+    .db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; 01, Plain sand
+    .db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $CF, $FF, $B7, $FF, $FF, $FF, $FF, $FF ; 02, Small sand mound
+    .db $FF, $FF, $FF, $FF, $FF, $FF, $E7, $FF, $DB, $FF, $BD, $FF, $FF, $FF, $FF, $FF ; 03, Large sand mound
+	
+    .db $00, $00, $01, $7E, $3F, $40, $3F, $40, $00, $00, $20, $CF, $E7, $08, $E7, $08 ; 04, Brick
 
 BG_Palette:
     .db $87, $10, $EF, $18, $55, $19, $D9, $15
