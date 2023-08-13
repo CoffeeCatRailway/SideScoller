@@ -17,11 +17,11 @@
 .ENDM
 
 ; 0400 = 0000 0100 0000 0000
-; E.g. SetTile $0400, $01
-;-------------------------
+; E.g. SetTile $0400, $01	Set tile in top-left
+;----------------------------------------------------
 ; In: POSITION - Flipped, palette & position
 ;     TILE_ID - What tile to use
-;-------------------------
+;----------------------------------------------------
 .MACRO SetTile
 	ldx #\1		; High: vhopppcc Low: cccccccc
 	stx $2116	; c: Starting character (tile) number
@@ -60,13 +60,13 @@ Start:
 	
 	SetTile $0400, $01
 	SetTile $0401, $01
-	SetTile $0402, $01
+	SetTile $0402, $02
 	SetTile $0403, $01
 	SetTile $0404, $01
 	SetTile $0405, $01
-	SetTile $0406, $01
+	SetTile $0406, $03
 	SetTile $0407, $01
-	SetTile $0408, $01
+	SetTile $0408, $02
 	SetTile $0409, $01
 	SetTile $040A, $01
 	SetTile $040B, $01
@@ -75,43 +75,43 @@ Start:
 	SetTile $040E, $01
 	SetTile $040F, $01
 	
-	SetTile $0410, $01
+	SetTile $0410, $02
 	SetTile $0411, $01
 	SetTile $0412, $01
 	SetTile $0413, $01
 	SetTile $0414, $01
-	SetTile $0415, $01
-	SetTile $0416, $01
+	SetTile $0415, $02
+	SetTile $0416, $03
 	SetTile $0417, $01
-	SetTile $0418, $01
+	SetTile $0418, $03
 	SetTile $0419, $01
 	SetTile $041A, $01
-	SetTile $041B, $01
+	SetTile $041B, $02
 	SetTile $041C, $01
 	SetTile $041D, $01
-	SetTile $041E, $01
+	SetTile $041E, $00
 	SetTile $041F, $01
 	
 	SetTile $0420, $01
 	SetTile $0421, $01
 	SetTile $0422, $01
-	SetTile $0423, $01
+	SetTile $0423, $00
 	SetTile $0424, $01
 	SetTile $0425, $01
-	SetTile $0426, $01
+	SetTile $0426, $02
 	SetTile $0427, $01
 	SetTile $0428, $01
 	SetTile $0429, $01
 	SetTile $042A, $01
-	SetTile $042B, $01
+	SetTile $042B, $03
 	SetTile $042C, $01
 	SetTile $042D, $01
-	SetTile $042E, $01
+	SetTile $042E, $02
 	SetTile $042F, $01
 	
 	SetTile $0430, $01
 	SetTile $0431, $01
-	SetTile $0432, $01
+	SetTile $0432, $02
 	SetTile $0433, $01
 	SetTile $0434, $01
 	SetTile $0435, $01
@@ -123,8 +123,8 @@ Start:
 	SetTile $043B, $01
 	SetTile $043C, $01
 	SetTile $043D, $01
-	SetTile $043E, $01
-	SetTile $043F, $01
+	SetTile $043E, $03
+	SetTile $043F, $02
 	
 	jsr SetupVideo				; Setup video modes and other stuff, then turn on screen
 	
