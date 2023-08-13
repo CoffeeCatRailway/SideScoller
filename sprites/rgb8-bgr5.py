@@ -14,7 +14,6 @@ import argparse
 
 # Constants
 paletteName = "BG_Palette"
-emptyColor = "0000"
 fileOut = "palette-out.inc"
 
 # Function to convert rgb888 color to bgr555
@@ -28,7 +27,7 @@ def convert(hex888="00FF00"):
     return hex555[2:4] + hex555[0:2]
 
 # Function to convert .pal file
-def handleFile(path, paletteSize=4, printOut=False, ignoreEmpty=True):
+def handleFile(path, paletteSize, printOut, ignoreEmpty, blankPalette):
     if not args.path.endswith(".pal"): # Check if file ends with .pal
         raise Exception("'path' must be of type '.pal'!")
     
@@ -51,13 +50,11 @@ def handleFile(path, paletteSize=4, printOut=False, ignoreEmpty=True):
         for i in range(0, len(hex555array), paletteSize):
             count = 0
             for j in range(0, paletteSize):
-                if hex555array[i+j] == emptyColor:
+                if hex555array[i + j] == blankPalette:
                     count += 1
-            if count == 4:
-                toRemove.append(i)
-                toRemove.append(i+1)
-                toRemove.append(i+2)
-                toRemove.append(i+3)
+            if count == paletteSize:
+                for k in range(0, paletteSize):
+                    toRemove.append(i + k)
         hex555array = [i for j, i in enumerate(hex555array) if j not in toRemove] # All indices in 'toRemove'
     
     # Write colors to file
@@ -84,9 +81,10 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--palettesize", type=int, choices=[4,8,16], default=4, help="How many colors are in one palette")
     parser.add_argument("-p", "--printout", action="store_true", help="Print out colors in console")
     parser.add_argument("-e", "--ignoreempty", action="store_false", help="Should ignore 'empty' palette's")
+    parser.add_argument("-b", "--blankpalette", type=str, default="0000", help="What is considered an 'empty' palette")
     args = parser.parse_args()
     
-    handleFile(args.path, args.palettesize, args.printout, args.ignoreempty)
+    handleFile(args.path, args.palettesize, args.printout, args.ignoreempty, args.blankpalette)
     
     #if len(sys.argv) >= 2:
     #    handleFile(sys.argv[1])
